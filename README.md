@@ -8,7 +8,7 @@ What is happening around you! This is my side project for learning web sraping a
   - Axios
 
 ### TODO:
-  [] Front-end development
-  [] Save data to database
-  [] Integrate facebook events
-  [] Integrate database and ORM
+  - [ ] Front-end development
+  - [ ] Save data to database
+  - [ ] Integrate facebook events
+  - [ ] Integrate database and ORM
