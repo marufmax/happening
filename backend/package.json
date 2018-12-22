@@ -1,11 +1,11 @@
 {
-  "name": "dhaka-events-api",
+  "name": "happening-api",
   "version": "1.0.0",
-  "description": "Dhaka events API Backend",
+  "description": "Happening API Backend",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev"  : "nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "api",
@@ -20,6 +20,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.3.0",
+    "cors": "^2.8.4"
   }
 }
