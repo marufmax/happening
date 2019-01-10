@@ -12,6 +12,7 @@ What is happening around you! This is my side project for learning web sraping a
 ## TODO
 
 - [ ] Front-end development
+- [x] Add axios
 - [ ] Request caching
 - [ ] Save data to database
 - [ ] Integrate facebook events
