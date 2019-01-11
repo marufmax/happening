@@ -38,8 +38,8 @@ function allEvents(location) {
 
             const eventCategories = [];
             const $categories = $element.find('.label').not('.label-success').each(function (i, element) {
-            const category = $(element).text();
-              eventCategories.push(category);
+                    const category = $(element).text();
+                    eventCategories.push(category);
             });
 
             const event = {

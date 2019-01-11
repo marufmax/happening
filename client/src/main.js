@@ -7,9 +7,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
+import underscore from 'vue-underscore'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
+Vue.use(underscore)
 Vue.component('v-icon', Icon)
 
 new Vue({

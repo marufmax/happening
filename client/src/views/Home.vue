@@ -6,7 +6,11 @@
 
     <b-container>
         <b-jumbotron header="What is happening??!" lead="See what is happening around you" >
-            <b-form-select v-model="location" :options="options" class="mb-3" />
+            <!-- <b-form-select v-model="location" :options="options" class="mb-3" /> -->
+            <vue-bootstrap-typeahead
+              v-model.lazy="location"
+              :data="address"
+            />
       </b-jumbotron>
 
       <div class="mt-4">
@@ -34,8 +38,6 @@
                     :key="index">{{ categories }}</b-badge>
               </b-card-footer>
             </b-card>
-
-
           </b-col>
         </b-row>
       </div>
@@ -48,38 +50,41 @@
 import API from '@/config/api.js'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+import { _ } from 'vue-underscore'
 
 export default {
   name: 'home',
   data() {
     return {
       location: null,
-      options: [
-        {
-          value: null,
-          text: 'Where do you want to go!',
-          disabled: true,
-          selected: true
-        },
-        { value: 'dhaka-bd', text: 'Dhaka, Bangladesh' },
-        { value: 'bangkok-th', text: 'Bangkok, Thailand' }
-      ],
+      address: ['Canada', 'Thailand', 'Dhaka', 'India'],
       events: [],
       isLoading: false,
       fullPage: true
     }
   },
   components: {
-    Loading
+    Loading,
+    VueBootstrapTypeahead
   },
   methods: {
-    search(searchLocation) {
-      this.isLoading = true
-      const ApiUrl = `events/${searchLocation}`
-      API.get(ApiUrl).then(response => {
-        this.isLoading = false
-        this.events = response.data
-      })
+    /**
+     * Asyncronously Search events for this location
+     *
+     * @param string searchLocation
+     * @returns json
+     */
+    async search(searchLocation) {
+      if (searchLocation) {
+        this.isLoading = true
+        const ApiUrl = `events/${searchLocation}`
+        await API.get(ApiUrl).then(response => {
+          this.isLoading = false
+          return (this.events = response.data)
+        })
+        return
+      }
     },
     filterDate(date) {
       const pattern = /^.+( \d{4})(?=.+)/gi
@@ -90,9 +95,9 @@ export default {
     }
   },
   watch: {
-    location(newVal) {
-      this.search(newVal)
-    }
+    location: _.debounce(function(addr) {
+      this.search(addr)
+    }, 500)
   }
 }
 </script>
