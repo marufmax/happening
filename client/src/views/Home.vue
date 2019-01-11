@@ -8,7 +8,8 @@
         <b-jumbotron header="What is happening??!" lead="See what is happening around you" >
             <!-- <b-form-select v-model="location" :options="options" class="mb-3" /> -->
             <vue-bootstrap-typeahead
-              v-model.lazy="location"
+              v-model="location"
+              @hit="search(location)"
               :data="address"
             />
       </b-jumbotron>
@@ -51,14 +52,14 @@ import API from '@/config/api.js'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
-import { _ } from 'vue-underscore'
+import cities from '../data/cities.js'
 
 export default {
   name: 'home',
   data() {
     return {
       location: null,
-      address: ['Canada', 'Thailand', 'Dhaka', 'India'],
+      address: cities,
       events: [],
       isLoading: false,
       fullPage: true
@@ -93,11 +94,6 @@ export default {
         return matches.toString()
       }
     }
-  },
-  watch: {
-    location: _.debounce(function(addr) {
-      this.search(addr)
-    }, 500)
   }
 }
 </script>
