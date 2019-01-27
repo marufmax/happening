@@ -2,14 +2,15 @@
   <div class="home">
      <loading :active.sync="isLoading"
         :can-cancel="true"
-        :is-full-page="fullPage"></loading>
+        :is-full-page="false"></loading>
 
     <b-container>
-        <b-jumbotron header="What is happening??!" lead="See what is happening around you" >
+        <b-jumbotron header="Free Fun evets for you!" lead="Find what's fun thing happening around you" >
             <!-- <b-form-select v-model="location" :options="options" class="mb-3" /> -->
             <vue-bootstrap-typeahead
               v-model="location"
               @hit="search(location)"
+              placeholder="Type your location....."
               :data="address"
             />
       </b-jumbotron>
